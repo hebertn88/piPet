@@ -30,3 +30,6 @@ references cadastro_tamanho (t_id),
 add foreign key (c_situacao)
 references cadastro_situacao (s_id);
 
+alter table cadastro_raca
+add foreign key (r_tipos)
+references cadastro_tipo (t_id);
