@@ -65,3 +65,9 @@ g_nivel int,
 g_nome varchar (250),
 primary key (g_id)
 ) default charset utf8;
+
+create table cadastro_tipo (
+t_id int not null,
+t_nome varchar (250),
+primary key (t_id)
+) default charset utf8;
