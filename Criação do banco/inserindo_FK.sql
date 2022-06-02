@@ -1,5 +1,5 @@
 alter table cadastro_raca 
-add column r_tipos smallint;
+add column r_tipos int;
 
 alter table cadastro_animal
 add column id_cor int;
