@@ -49,12 +49,9 @@
             <div class="container" id="achados">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Achados</h2>
-                    <h3 class="section-subheading text-muted">Últimos animais achados postados em nosso site.</h3>
+                    <h3 class="section-subheading text-muted">Últimos animais achados publicados em nosso site.</h3>
                 </div>
                 <?php
-                    $query = "SELECT count(a.c_id) total FROM `cadastro_animal` a WHERE a.c_situacao = 1 AND a.c_finalizado = 0";
-                    $sql_achados_tot = $mysqli->query($query) or die($mysqli->error);
-                    $achados_tot =  $sql_achados_tot->fetch_array()['total'];              
                     $query_achados = "SELECT a.*,
                                              t.t_nome,
                                              r.r_nome,
@@ -74,28 +71,26 @@
                                          AND r.r_tipos = tp.t_id
                                          AND a.c_situacao = 1
                                          AND a.c_finalizado = 0
-                                    ORDER BY a.c_data DESC";
-                    if ($achados_tot > 5){
-                        $query_achados .= " LIMIT 5";
-                    }
-                $sql_achados = $mysqli->query($query_achados) or die($mysqli->error);
+                                    ORDER BY a.c_data DESC
+                                       LIMIT 6";
+                    $achados = $mysqli->query($query_achados)->fetch_all(MYSQLI_ASSOC);
                 ?>
                 <div class="row">
                     <?php
-                        $achados_row = 1;
-                        while ($achados = $sql_achados->fetch_array()){              
+                        $item = 1;
+                        foreach ($achados as $animal) {              
                     ?>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#achadosModal<?php echo $achados_row; ?>">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#achadosModal<?php echo $item; ?>">
                                 <div class="portfolio-hover" style="z-index:1;">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
                                 <div class="ratio ratio-1x1"><img style="object-fit: cover;"
                                 <?php
-                                    if ($achados['c_foto'] != ""){
-                                        echo 'src="upload/'. $achados['c_foto'] .'"'; 
+                                    if ($animal['c_foto'] != ""){
+                                        echo 'src="upload/'. $animal['c_foto'] .'"'; 
                                     } else {
                                         echo 'src="assets/img/sem_imagem.png"';
                                     }
@@ -103,14 +98,17 @@
                                     alt="..." /></div>
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading"><?php echo $achados['c_nomeanimal']; ?></div>
+                                <div class="portfolio-caption-heading"><?php echo $animal['c_nomeanimal']; ?></div>
                             </div>
                         </div>
                     </div>
                     <?php
-                        $achados_row ++;
+                        if ($item == 5) {
+                            break;
                         }
-                        if ($achados_tot > 5) {
+                        $item++;
+                        }
+                        if (count($achados) > 5) {
                     ?>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <!-- VER MAIS -->
@@ -137,12 +135,9 @@
             <div class="container" id="perdidos">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Perdidos</h2>
-                    <h3 class="section-subheading text-muted">Últimos animais perdidos postados em nosso site.</h3>
+                    <h3 class="section-subheading text-muted">Últimos animais perdidos publicados em nosso site.</h3>
                 </div>
                 <?php
-                    $query = "SELECT count(a.c_id) total FROM `cadastro_animal` a WHERE a.c_situacao = 2 AND a.c_finalizado = 0";
-                    $sql_perdidos_tot = $mysqli->query($query) or die($mysqli->error);
-                    $perdidos_tot =  $sql_perdidos_tot->fetch_array()['total'];              
                     $query_perdidos = "SELECT a.*,
                                              t.t_nome,
                                              r.r_nome,
@@ -162,28 +157,26 @@
                                          AND r.r_tipos = tp.t_id
                                          AND a.c_situacao = 2
                                          AND a.c_finalizado = 0
-                                    ORDER BY a.c_data DESC";
-                    if ($perdidos_tot > 5){
-                        $query_perdidos .= " LIMIT 5";
-                    }
-                $sql_perdidos = $mysqli->query($query_perdidos) or die($mysqli->error);
+                                    ORDER BY a.c_data DESC
+                                       LIMIT 6";
+                    $perdidos = $mysqli->query($query_perdidos)->fetch_all(MYSQLI_ASSOC);
                 ?>
                 <div class="row">
                     <?php
-                        $perdidos_row = 1;
-                        while ($perdidos = $sql_perdidos->fetch_array()){              
+                        $item = 1;
+                        foreach ($perdidos as $animal) {              
                     ?>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#perdidosModal<?php echo $perdidos_row; ?>">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#perdidosModal<?php echo $item; ?>">
                                 <div class="portfolio-hover" style="z-index:1;">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
                                 <div class="ratio ratio-1x1"><img style="object-fit: cover;"
                                 <?php
-                                    if ($perdidos['c_foto'] != ""){
-                                        echo 'src="upload/'. $perdidos['c_foto'] .'"'; 
+                                    if ($animal['c_foto'] != ""){
+                                        echo 'src="upload/'. $animal['c_foto'] .'"'; 
                                     } else {
                                         echo 'src="assets/img/sem_imagem.png"';
                                     }
@@ -191,14 +184,17 @@
                                     alt="..." /></div>
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading"><?php echo $perdidos['c_nomeanimal']; ?></div>
+                                <div class="portfolio-caption-heading"><?php echo $animal['c_nomeanimal']; ?></div>
                             </div>
                         </div>
                     </div>
                     <?php
-                        $perdidos_row ++;
+                        if ($item == 5) {
+                            break;
                         }
-                        if ($perdidos_tot > 5) {
+                        $item++;
+                        }
+                        if (count($perdidos) > 5) {
                     ?>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <!-- VER MAIS -->
@@ -220,9 +216,10 @@
         </section>
         <!-- FIM Perdidos -->
 
+
         <!-- Parcerias -->
         <section class="page-section" id="about">
-        <div class="container">
+            <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Parcerias & Doações</h2>
                     <h3 class="section-subheading text-muted">Aqui estão listados alguns de nossos parceiros e doações</h3>
@@ -337,12 +334,10 @@
 
         <!-- ACHADOS Modals-->
         <?php
-            $sql_achados = $mysqli->query($query_achados) or die($mysqli->error);
-
-            $achados_row = 1;
-            while ($achados = $sql_achados->fetch_array()){
+            $item = 1;
+            foreach ($achados as $animal) {
         ?>
-        <div class="portfolio-modal modal fade" id="achadosModal<?php echo $achados_row; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="portfolio-modal modal fade" id="achadosModal<?php echo $item; ?>" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
@@ -351,50 +346,50 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project details-->
-                                    <h2 class="text-uppercase"><?php echo $achados['c_nomeanimal']; ?></h2>
-                                    <p class="item-intro text-muted"><strong>Enviado por:</strong> <?php echo $achados['u_nomecompleto']; ?>
-                                    <br><strong>Em:</strong> <?php echo date("d/m/Y H:i:s", strtotime($achados['c_data'])); ?></p>
+                                    <h2 class="text-uppercase"><?php echo $animal['c_nomeanimal']; ?></h2>
+                                    <p class="item-intro text-muted"><strong>Enviado por:</strong> <?php echo $animal['u_nomecompleto']; ?>
+                                    <br><strong>Em:</strong> <?php echo date("d/m/Y H:i:s", strtotime($animal['c_data'])); ?></p>
                                     <img class="img-fluid d-block mx-auto"
                                         <?php
-                                            if ($achados['c_foto'] != ""){
-                                                echo 'src="upload/'. $achados['c_foto'] .'"'; 
+                                            if ($animal['c_foto'] != ""){
+                                                echo 'src="upload/'. $animal['c_foto'] .'"'; 
                                             } else {
                                                 echo 'src="assets/img/sem_imagem.png"';
                                             }
                                         ?>
                                         alt="..." />
-                                    <p><?php echo $achados['c_descricao']; ?></p>
+                                    <p><?php echo $animal['c_descricao']; ?></p>
                                     <ul class="list-inline">
                                         <li>
                                             <strong>Tamanho:</strong>
-                                            <?php echo $achados['t_nome']; ?>
+                                            <?php echo $animal['t_nome']; ?>
                                         </li>
                                         <li>
                                             <strong>Raça:</strong>
-                                            <?php echo $achados['r_nome']; ?>
+                                            <?php echo $animal['r_nome']; ?>
                                         </li>
                                         <li>
                                             <strong>Cor:</strong>
-                                            <?php echo $achados['c_cor']; ?>
+                                            <?php echo $animal['c_cor']; ?>
                                         </li>
                                         <li>
                                             <?php
-                                                if ($achados['c_endereco'] != ""){ ?>
+                                                if ($animal['c_endereco'] != ""){ ?>
                                             <strong>Localização:</strong>
-                                            <?php echo $achados['c_endereco'];
+                                            <?php echo $animal['c_endereco'];
                                             } ?>
                                         </li>
                                         <li>
                                             <?php
-                                                if ($achados['c_contato'] != ""){ ?>
+                                                if ($animal['c_contato'] != ""){ ?>
                                             <strong>Contato:</strong>
-                                            <?php echo $achados['c_contato'];
+                                            <?php echo $animal['c_contato'];
                                             } ?>
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Fechar
+                                        voltar
                                     </button>
                                 </div>
                             </div>
@@ -404,19 +399,20 @@
             </div>
         </div>
         <?php
-            $achados_row ++;
+            if ($item == 5) {
+                break;
+            }
+            $item ++;
             }
         ?>
         <!-- FIM ACHADOS Modals-->
 
         <!-- PERDIDOS Modals-->
         <?php
-            $sql_perdidos = $mysqli->query($query_perdidos) or die($mysqli->error);
-
-            $perdidos_row = 1;
-            while ($perdidos = $sql_perdidos->fetch_array()){
+            $item = 1;
+            foreach ($perdidos as $animal) {
         ?>
-        <div class="portfolio-modal modal fade" id="perdidosModal<?php echo $perdidos_row; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="portfolio-modal modal fade" id="perdidosModal<?php echo $item; ?>" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
@@ -425,50 +421,50 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project details-->
-                                    <h2 class="text-uppercase"><?php echo $perdidos['c_nomeanimal']; ?></h2>
-                                    <p class="item-intro text-muted"><strong>Enviado por:</strong> <?php echo $perdidos['u_nomecompleto']; ?>
-                                    <br><strong>Em:</strong> <?php echo date("d/m/Y H:i:s", strtotime($perdidos['c_data'])); ?></p>
+                                    <h2 class="text-uppercase"><?php echo $animal['c_nomeanimal']; ?></h2>
+                                    <p class="item-intro text-muted"><strong>Enviado por:</strong> <?php echo $animal['u_nomecompleto']; ?>
+                                    <br><strong>Em:</strong> <?php echo date("d/m/Y H:i:s", strtotime($animal['c_data'])); ?></p>
                                     <img class="img-fluid d-block mx-auto"
                                         <?php
-                                            if ($perdidos['c_foto'] != ""){
-                                                echo 'src="upload/'. $perdidos['c_foto'] .'"'; 
+                                            if ($animal['c_foto'] != ""){
+                                                echo 'src="upload/'. $animal['c_foto'] .'"'; 
                                             } else {
                                                 echo 'src="assets/img/sem_imagem.png"';
                                             }
                                         ?>
                                         alt="..." />
-                                    <p><?php echo $perdidos['c_descricao']; ?></p>
+                                    <p><?php echo $animal['c_descricao']; ?></p>
                                     <ul class="list-inline">
                                         <li>
                                             <strong>Tamanho:</strong>
-                                            <?php echo $perdidos['t_nome']; ?>
+                                            <?php echo $animal['t_nome']; ?>
                                         </li>
                                         <li>
                                             <strong>Raça:</strong>
-                                            <?php echo $perdidos['r_nome']; ?>
+                                            <?php echo $animal['r_nome']; ?>
                                         </li>
                                         <li>
                                             <strong>Cor:</strong>
-                                            <?php echo $perdidos['c_cor']; ?>
+                                            <?php echo $animal['c_cor']; ?>
                                         </li>
                                         <li>
                                             <?php
-                                                if ($perdidos['c_endereco'] != ""){ ?>
+                                                if ($animal['c_endereco'] != ""){ ?>
                                             <strong>Localização:</strong>
-                                            <?php echo $perdidos['c_endereco'];
+                                            <?php echo $animal['c_endereco'];
                                             } ?>
                                         </li>
                                         <li>
                                             <?php
-                                                if ($perdidos['c_contato'] != ""){ ?>
+                                                if ($animal['c_contato'] != ""){ ?>
                                             <strong>Contato:</strong>
-                                            <?php echo $perdidos['c_contato'];
+                                            <?php echo $animal['c_contato'];
                                             } ?>
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Fechar
+                                        Voltar
                                     </button>
                                 </div>
                             </div>
@@ -478,7 +474,10 @@
             </div>
         </div>
         <?php
-            $perdidos_row ++;
+            if ($item == 5) {
+                break;
+            }
+            $item ++;
             }
         ?>
         <!-- FIM PERDIDOS Modals-->
