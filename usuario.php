@@ -33,14 +33,7 @@
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Achados</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">Perdidos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Parcerias/Doações</a></li>                        
-                        <li class="nav-item"><a class="nav-link" href="usuario.php">Usuários</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
-                        <li class="nav-item"><a class="nav-link" href="admin.php" target="_blank"><i class="bi bi-person"></i></a></li>
-                    </ul>
+                 <?php include "topo.php"; ?>
                 </div>
             </div>
         </nav>

@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #DDD;
+}
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+a{text-decoration: none;}
+
+h2{
+    margin-bottom: 30px ;
+}
+p{
+    font-size: 16px;
+    color: rgb(34, 34, 34);
+}
+.p_margin{
+    margin-bottom: 10px;
+}
+.contatos{
+    width: 100%;
+    text-align: justify;
+    display: flex;
+    justify-content: space-around;
+}
+.box{
+    width: 50%;
+    padding: 50px;
+}
+#cachorro{
+    width: 70%;
+    display: block;
+    margin: 16px auto;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.field{
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #DDD; 
+    border-radius: 5px; 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+.botao{
+    transition: 0.3s;
+    background-color: rgb(2, 131, 170);
+    color: white;
+}
+.botao:hover{
+    background-color: rgb(31, 155, 31);
+}
+.botao2{
+    width: 100%;
+    transition: 0.3s;
+    background-color: rgb(31, 155, 31);
+    color: white;
+}
+.botao2 a{
+    color: white;
+    padding: 0 36% 0 40%;
+}
+.botao2:hover{
+    background-color: rgb(28, 138, 28);
+}
+
+textarea{
+    height: 150px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #DDD;
+    border: rgb(167, 167, 167) solid 3px;
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+    border-radius: 5px;
+    padding: 260px 20px;
+    width: 100%;
+}
+
+.modal:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+.modal h2{
+    text-align: center;
+}
+.modal p{
+    text-align: center;
+}
+.fechar {
+    position: absolute;
+    width: 30px;
+    right: 12px;
+    top: 5px;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 5px;
+    background: #ff4545;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #8d0000;
+}
+
+@media screen and (max-width: 900px){
+    h2{
+        font-size: 20px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+    .contatos{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+    }
+    .box{
+        width: 100%;
+        height: max-content;
+        padding: 5px 20px;
+    }
+    #cachorro{
+        width: 80%;
+    }
+}

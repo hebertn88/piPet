@@ -41,14 +41,7 @@
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Achados</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">Perdidos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Parcerias/Doações</a></li>                        
-                        <li class="nav-item"><a class="nav-link" href="usuario.php">Usuários</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
-                        <li class="nav-item"><a class="nav-link" href="admin.php" target="_blank"><i class="bi bi-person"></i></a></li>
-                    </ul>
+                 <?php include "topo.php"; ?>
                 </div>
             </div>
         </nav>
@@ -63,33 +56,7 @@
         <div class="row">
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    
-                <li class="nav-item">
-                    <a class="nav-link" href="user.php">
-                    <i class="bi bi-heart-fill"></i>
-                    Animais
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cadastro_animais.php">
-                    <span data-feather="users"></span>
-                    Cadastrar
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="usereditar.php">
-                    <i class="bi bi-emoji-heart-eyes"></i> 
-                    Dados cadastrais
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="sairuser.php">
-                    <span data-feather="users"></span>
-                    Sair
-                    </a>
-                </li>
-                </ul>            
+            <?php include "menuuser.php"; ?>             
             </div>
             </nav>
 

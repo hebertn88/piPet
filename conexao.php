@@ -1,15 +1,12 @@
 <?php
 
-$host = "localhost";
-$usuario = "user_pi";
-$senha = "piUnivesp*";
-$bd = "mydb";
+//$mysqli = mysqli_connect('kdmeupet.mysql.dbaas.com.br','kdmeupet','K@d#mpe!20','kdmeupet');
+$mysqli = mysqli_connect('localhost','kdmeupet','K@d#mpe!20','kdmeupet');
 
-$mysqli = new mysqli($host,$usuario,$senha,$bd);
+// Para mysqli
+mysqli_set_charset($mysqli,"utf8");
 
-if ($mysqli -> connect_errno){
-    echo "Conexão falhou: " . $mysqli -> connect_error;
-    exit();
+if (!$mysqli){
+    die("Conexão falhou: " . mysqli_connect_error());
 }
-
 ?>
