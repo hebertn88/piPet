@@ -46,6 +46,14 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+          <?php
+            if (isset($_SESSION['msgContent'])) {
+              echo '<div class="container p-3">' . $_SESSION['msgContent'] . '</div>';
+            }
+            unset($_SESSION['msgContent']);
+          ?>
+
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Parcerias</h1>           
           </div>
@@ -70,6 +78,8 @@
                     <th>Mensagem</th>
                     <th>Data</th> 
                     <th>Telefone</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>                
@@ -83,18 +93,41 @@
                     <td><?php echo $dado["email"]; ?></td>
                     <td><?php echo $dado["msg"]; ?></td>
                     <td><?php echo date('d/m/Y H:i', strtotime($dado["created"])); ?></td>
-                    <td><?php echo $dado["telefone"]; ?></td>  
+                    <td><?php echo $dado["telefone"]; ?></td>
+                    <td>
+                      <?php
+                        if ($dado['aprovado'] == 0) {
+                          echo 'Pendente';
+                        } else {
+                          echo 'Aprovado';
+                        }
+                      ?>
+                    </td>
+                    <td class="text-nowrap actionGroup">
+                      <?php
+                        if ($dado['aprovado'] == 0) {
+                          echo '<a href="parcerias_aprovar.php?id=' . $dado['id'] . '" class="btn btn-success btn-sm text-light" role="button">Aprovar</a>';
+                        } else {
+                          echo '<a class="btn btn-secondary btn-sm text-light disabled" aria-disabled="true" role="button">Aprovar</a>';
+
+                        }
+                      ?>
+                      <a href="c_parcerias_editar.php?id=<?php echo $dado['id']; ?>" class="btn btn-primary btn-sm text-light" role="button">Editar</a>
+                      <a href="parcerias_excluir.php?id=<?php echo $dado['id']; ?>" class="btn btn-danger btn-sm text-light btn-excluir" role="button">Excluir</a>
+                    </td>
+
                     </tr> 
                     <?php } ?> 
                 </tbody>
                 <?php } ?> 
                 </table>
             </div>
-                   
           </div>
         </main>
       </div>
     </div>
+
+    
 
     <!-- Principal JavaScript do Bootstrap
     ================================================== -->
@@ -103,6 +136,8 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="css/bootstrap-4.1.3/assets/js/vendor/popper.min.js"></script>
     <script src="css/bootstrap-4.1.3/dist/js/bootstrap.min.js"></script>
+    
+    <script src="c_parcerias.js"></script>
 
     <!-- Ícones -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>

@@ -40,10 +40,16 @@
         <!-- Banner -->
         <header class="masthead">
             <div class="container">                             
-            </div>
-        </header>    
-        <!-- FIM Banner -->    
-        
+                </div>
+            </header>    
+        <!-- FIM Banner --> 
+
+        <?php
+            if (isset($_SESSION['msgContent'])) {
+            echo '<div class="container p-3">' . $_SESSION['msgContent'] . '</div>';
+            }
+            unset($_SESSION['msgContent']);
+        ?>
         <!-- Achados -->
         <section class="page-section bg-light" id="portfolio">
             <div class="container" id="achados">
