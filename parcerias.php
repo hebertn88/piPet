@@ -44,22 +44,60 @@
         </header>    
         <!-- FIM Banner -->                  
         
+        <?php
+            if (isset($_SESSION['msgContent'])) {
+            echo '<div class="container p-3">' . $_SESSION['msgContent'] . '</div>';
+            }
+            unset($_SESSION['msgContent']);
+        ?>
+
+                <!-- Parcerias -->
+                <?php
+        // busca parcerias
+            $query = "SELECT * FROM `contacts_msg` WHERE `aprovado` = 1 ORDER BY RAND()";
+            $select = $mysqli -> query($query);
+        ?>
+        <section class="page-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Parcerias</h2>
+                    <?php
+                        if (mysqli_num_rows($select) > 0) {
+                    ?>
+                        <h3 class="section-subheading text-muted">Aqui estão listados alguns de nossos parceiros.</h3>
+                    <?php } ?>
+                </div>
+                <?php
+                    if (mysqli_num_rows($select) > 0) {
+                        echo '<ul class="timeline">';
+                        $num_linha = 1;
+                        while ($parceria = $select->fetch_array()) {
+                ?>
+                        <li <?php if ($num_linha % 2 == 0) echo 'class="timeline-inverted"'?> >
+                            <div class="timeline-image ratio ratio-1x1">
+                                <img class="rounded-circle" style="object-fit: cover;" src="upload/parcerias/<?php echo $parceria['imagem']; ?>" alt="Logo <?php echo $parceria['titulo']; ?>" />
+                            </div>
+                            <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4><?php echo $parceria['titulo']; ?></h4>
+                                <h5 class="subheading"><?php echo $parceria['contato_organizacao']; ?></h5>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted"><?php echo $parceria['msg']; ?></p></div>
+                        </div>
+                        </li>
+                    <?php
+                        $num_linha++; 
+                        }
+                    echo '</ul>';
+                    }
+                    ?>      
+            </div>
+        </section>
+        <!-- FIM Parcerias -->
+
         <!-- Contato -->
         <?php include "contato.php"; ?>
         <!-- FIM Contato -->
-
-        <!-- Rodapé -->
-        <footer class="footer py-4">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 my-3 my-lg-0">
-                    </div>
-                    <div class="col-lg-4 text-lg-end">
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- FIM Rodapé -->
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="js/scripts.js"></script>

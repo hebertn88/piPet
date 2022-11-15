@@ -49,7 +49,7 @@
 
    if ($insert){
      $_SESSION['msgContent'] = '<div class="alert alert-success" role="alert">
-     Animal cadastrado com Sucesso!
+     Informações enviadas com sucesso! Antes elas serão analizadas para então serem publicadas!
      </div>'; // conteudo da mensagem
    } else {
      $msg_erro = 'Query: <code>' . $query . '</code><br>Erro: <code>' . $mysqli->error . '</code>';

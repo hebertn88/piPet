@@ -40,8 +40,8 @@
         <!-- Banner -->
         <header class="masthead">
             <div class="container">                             
-                </div>
-            </header>    
+            </div>
+        </header>    
         <!-- FIM Banner --> 
 
         <?php
@@ -227,54 +227,45 @@
         <!-- FIM Perdidos -->
 
         <!-- Parcerias -->
+        <?php
+        // busca parcerias
+            $query = "SELECT * FROM `contacts_msg` WHERE `aprovado` = 1 ORDER BY RAND() LIMIT 5";
+            $select = $mysqli -> query($query);
+        ?>
         <section class="page-section" id="about">
-        <div class="container">
+            <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Parcerias & Doações</h2>
-                    <h3 class="section-subheading text-muted">Aqui estão listados alguns de nossos parceiros e doações</h3>
+                    <h2 class="section-heading text-uppercase">Parcerias</h2>
+                    <?php
+                        if (mysqli_num_rows($select) > 0) {
+                    ?>
+                        <h3 class="section-subheading text-muted">Aqui estão listados alguns de nossos parceiros.</h3>
+                    <?php } ?>
                 </div>
-                <ul class="timeline">
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/parceriasedoacoes/1.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>Desde Janeiro de 2022</h4>
-                                <h4 class="subheading">APAP Penápolis</h4>
+                <?php
+                    if (mysqli_num_rows($select) > 0) {
+                        echo '<ul class="timeline">';
+                        $num_linha = 1;
+                        while ($parceria = $select->fetch_array()) {
+                ?>
+                        <li <?php if ($num_linha % 2 == 0) echo 'class="timeline-inverted"'?> >
+                            <div class="timeline-image ratio ratio-1x1">
+                                <img class="rounded-circle" style="object-fit: cover;" src="upload/parcerias/<?php echo $parceria['imagem']; ?>" alt="Logo <?php echo $parceria['titulo']; ?>" />
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Nossa parceira APAP é uma instituição sem fins lucrativos, fundada em 28 de agosto de 1995, visando proteção dos animais, cuidados com o meio ambiente e qualidade da saúde pública.</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/parceriasedoacoes/2.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
+                            <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>Doado em Março de 2022</h4>
-                                <h4 class="subheading">Doação de rações</h4>
+                                <h4><?php echo $parceria['titulo']; ?></h4>
+                                <h5 class="subheading"><?php echo $parceria['contato_organizacao']; ?></h5>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Foram doados 08 sacos de ração de 20 kg, que ajudará os nossos pets por 2 meses.</p></div>
+                            <div class="timeline-body"><p class="text-muted"><?php echo $parceria['msg']; ?></p></div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/parceriasedoacoes/3.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>Desde Abril de 2022</h4>
-                                <h4 class="subheading">PetMed</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">A PetMed é nossa parceira e nos auxiliar em atendimentos de pets acolhidos em situações críticas de abandono.</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/parceriasedoacoes/4.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>Desde Maio de 2022</h4>
-                                <h4 class="subheading">Caninos Petshop</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">A Caninos Petshop também é nossa parceira e nos da suporte para manter a vacinação dos nossos pets em dia.</p></div>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                    <?php
+                        $num_linha++; 
+                        }
+                    echo '</ul>';
+                    }
+                    ?>      
             </div>
         </section>
         <!-- FIM Parcerias -->       

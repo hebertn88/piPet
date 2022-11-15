@@ -34,13 +34,13 @@
                 <div class="d-flex flex-column">
                     <!-- Titulo -->
                     <div class="form-group">
-                        <input class="form-control" name="title" id="title" type="text" placeholder="Título" data-sb-validations="required" required />
+                        <input class="form-control" name="title" id="title" type="text" placeholder="Nome da Organização" data-sb-validations="required" required />
                         <div class="invalid-feedback" data-sb-feedback="name:required">Título é obrigatório.</div>
                     </div>
                     <!-- Mensagem -->
                     <div class="form-group">
-                        <textarea class="form-control" id="message" name="msg" rows="3" placeholder="Insira sua mensagem" data-sb-validations="required" required ></textarea>
-                        <div class="invalid-feedback" data-sb-feedback="message:required">Mensagem é obrigatória.</div>
+                        <textarea class="form-control" id="message" name="msg" rows="3" placeholder="Faça uma breve descrição das atividades da Organização" data-sb-validations="required" required ></textarea>
+                        <div class="invalid-feedback" data-sb-feedback="message:required">A Descrição é obrigatória.</div>
                     </div>
                 </div>
                 <div class="d-flex flex-row align-items-center gap-3">
